@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio History - VoicePunjabAI</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .history-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .history-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fcfdff;
+    }
+
+    .history-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .history-text {
+      margin-top: 10px;
+      line-height: 1.6;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .history-actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .empty-box {
+      margin-top: 20px;
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      background: #fcfdff;
+      color: var(--muted);
+    }
+
+    .danger-btn {
+      border: 1px solid #fecdd3;
+      background: #fff1f2;
+      color: #be123c;
+    }
+
+    .danger-btn:hover {
+      box-shadow: 0 8px 18px rgba(190, 18, 60, 0.10);
+    }
+
+    .inline-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <div class="logo-wrap">
+            <img src="images/logo.png" alt="VoicePunjabAI logo" class="site-logo" />
+          </div>
+          <div>
+            <div class="title">VoicePunjabAI</div>
+            <div class="subtitle">Punjabi Text-to-Speech</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="history.html" class="active">History</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-right">
+        <div id="authArea" class="small"></div>
+      </div>
+    </header>
+
+    <section class="card" style="margin-top:20px;">
+      <h2>Your Audio History</h2>
+      <p class="small">
+        View your recent generated audio files, replay them, download them again, or load them back into the main tool.
+      </p>
+      <div id="historyNote" class="small">Loading history...</div>
+    </section>
+
+    <section id="historyList" class="history-list"></section>
+
+    <footer class="site-footer">
+      <div class="footer-bottom">
+        <div class="footer-note">© 2026 VoicePunjabAI</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const API_BASE = "https://voicepunjab-api-777821135954.us-central1.run.app";
+    const authArea = document.getElementById("authArea");
+    const historyNote = document.getElementById("historyNote");
+    const historyList = document.getElementById("historyList");
+
+    function getToken() {
+      return localStorage.getItem("vp_token") || "";
+    }
+
+    function getSavedUser() {
+      try {
+        return JSON.parse(localStorage.getItem("vp_user") || "null");
+      } catch {
+        return null;
+      }
+    }
+
+    function logoutUser() {
+      localStorage.removeItem("vp_token");
+      localStorage.removeItem("vp_user");
+      window.location.href = "index.html";
+    }
+
+    function renderAuthArea() {
+      const user = getSavedUser();
+
+      if (user) {
+        authArea.innerHTML = `
+          Logged in as <strong>${user.name}</strong> (${user.plan})
+          <button id="logoutBtn" type="button" style="margin-left:10px;">Logout</button>
+        `;
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", logoutUser);
+        }
+      } else {
+        authArea.innerHTML = `
+          <a href="login.html">Login</a> /
+          <a href="signup.html">Sign Up</a>
+        `;
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatDate(value) {
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value || "";
+      return d.toLocaleString();
+    }
+
+    function useAgain(item) {
+      sessionStorage.setItem("vp_history_draft", JSON.stringify({
+        original_text: item.original_text,
+        voice: item.voice,
+        speed: item.speed,
+        pitch: item.pitch
+      }));
+      window.location.href = "index.html";
+    }
+
+    async function deleteHistoryItem(id) {
+      const token = getToken();
+
+      if (!token) {
+        alert("Please log in first.");
+        return;
+      }
+
+      const ok = window.confirm("Delete this history item?");
+      if (!ok) return;
+
+      try {
+        const res = await fetch(API_BASE + "/api/history/" + encodeURIComponent(id), {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + token
+          }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Could not delete history item.");
+        }
+
+        await loadHistory();
+      } catch (err) {
+        alert(err.message || "Could not delete history item.");
+      }
+    }
+
+    async function loadHistory() {
+      const token = getToken();
+
+      if (!token) {
+        historyNote.textContent = "Please log in to view your history.";
+        historyList.innerHTML = `
+          <div class="empty-box">
+            You need to log in first to save and view generated audio history.
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const res = await fetch(API_BASE + "/api/history", {
+          headers: {
+            Authorization: "Bearer " + token
+          },
+          cache: "no-store"
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to load history.");
+        }
+
+        const items = data.items || [];
+
+        if (!items.length) {
+          historyNote.textContent = "No saved audio yet.";
+          historyList.innerHTML = `
+            <div class="empty-box">
+              Your generated audio history will appear here after you create audio while logged in.
+            </div>
+          `;
+          return;
+        }
+
+        historyNote.textContent = `Showing ${items.length} recent audio item(s).`;
+
+        historyList.innerHTML = items.map(item => {
+          const fullAudioUrl = API_BASE + item.audio_url;
+
+          return `
+            <article class="history-item">
+              <h3>Generated Audio</h3>
+
+              <div class="history-meta">
+                <span><strong>Voice:</strong> ${escapeHtml(item.voice)}</span>
+                <span><strong>Speed:</strong> ${escapeHtml(item.speed)}</span>
+                <span><strong>Pitch:</strong> ${escapeHtml(item.pitch)}</span>
+                <span><strong>Date:</strong> ${escapeHtml(formatDate(item.created_at))}</span>
+              </div>
+
+              <div class="history-text">${escapeHtml(item.original_text)}</div>
+
+              <div class="history-actions">
+                <audio controls preload="none" src="${fullAudioUrl}"></audio>
+              </div>
+
+              <div class="history-actions">
+                <a class="btn-link primary" href="${fullAudioUrl}" download="voicepunjab-history.mp3">Download MP3</a>
+                <button type="button" class="use-again-btn" data-id="${item.id}">Use Again</button>
+                <button type="button" class="danger-btn delete-btn" data-id="${item.id}">Delete</button>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        historyList.querySelectorAll(".use-again-btn").forEach((btn, index) => {
+          btn.addEventListener("click", () => useAgain(items[index]));
+        });
+
+        historyList.querySelectorAll(".delete-btn").forEach((btn) => {
+          btn.addEventListener("click", () => deleteHistoryItem(btn.dataset.id));
+        });
+      } catch (err) {
+        historyNote.textContent = err.message || "Failed to load history.";
+        historyList.innerHTML = `
+          <div class="empty-box">
+            Could not load audio history right now.
+          </div>
+        `;
+      }
+    }
+
+    renderAuthArea();
+    loadHistory();
+  </script>
+</body>
+</html>

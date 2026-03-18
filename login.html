@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - VoicePunjabAI</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <div class="logo-wrap">
+            <img src="images/logo.png" alt="VoicePunjabAI logo" class="site-logo" />
+          </div>
+          <div>
+            <div class="title">VoicePunjabAI</div>
+            <div class="subtitle">Punjabi Text-to-Speech &amp; Translation</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active">Login</a>
+        <a href="signup.html">Sign Up</a>
+      </nav>
+
+      <div class="header-right">
+        <div class="status ok">Account Access</div>
+      </div>
+    </header>
+
+    <section class="intro-strip">
+      <p id="verifyBanner">
+        Log in to track your usage by account and access your plan limits.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top:20px; max-width:700px;">
+      <h2>Login</h2>
+      <p class="small">Enter your email and password to continue.</p>
+
+      <form id="loginForm" style="margin-top:14px;">
+        <label class="labelBlock" for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+        <label class="labelBlock" for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+        <div class="btnrow">
+          <button type="submit" class="primary">Login</button>
+          <a href="signup.html" class="btn-link secondary">Create Account</a>
+        </div>
+
+        <div class="small" style="margin-top:10px;">
+          <a href="forgot-password.html">Forgot your password?</a>
+        </div>
+
+        <div id="loginNote" class="small">Use your VoicePunjabAI account to continue.</div>
+      </form>
+
+      <hr style="margin:20px 0; border:none; border-top:1px solid #e3e8f4;">
+
+      <h3 style="margin-top:0;">Resend Verification Email</h3>
+      <form id="resendForm" style="margin-top:10px;">
+        <label class="labelBlock" for="resendEmail">Email</label>
+        <input type="email" id="resendEmail" placeholder="Enter your email" required>
+
+        <div class="btnrow">
+          <button type="submit">Resend Verification</button>
+        </div>
+
+        <div id="resendNote" class="small">Use this if you did not receive your verification email.</div>
+      </form>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-bottom">
+        <div class="footer-note">© 2026 VoicePunjabAI. All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const API_BASE = "https://voicepunjab-api-777821135954.us-central1.run.app";
+    const loginForm = document.getElementById("loginForm");
+    const loginNote = document.getElementById("loginNote");
+    const resendForm = document.getElementById("resendForm");
+    const resendNote = document.getElementById("resendNote");
+    const verifyBanner = document.getElementById("verifyBanner");
+
+    const params = new URLSearchParams(window.location.search);
+    const verified = params.get("verified");
+
+    if (verified === "1") {
+      verifyBanner.textContent = "Your email has been verified. You can log in now.";
+    } else if (verified === "0") {
+      verifyBanner.textContent = "Verification link is invalid or expired. Please request a new verification email.";
+    }
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      loginNote.textContent = "Logging in...";
+
+      try {
+        const res = await fetch(API_BASE + "/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Login failed.");
+        }
+
+        localStorage.setItem("vp_token", data.token);
+        localStorage.setItem("vp_user", JSON.stringify(data.user));
+
+        loginNote.textContent = "Login successful. Redirecting...";
+        window.location.href = "index.html";
+      } catch (err) {
+        loginNote.textContent = err.message || "Login failed.";
+      }
+    });
+
+    resendForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("resendEmail").value.trim();
+      resendNote.textContent = "Sending verification email...";
+
+      try {
+        const res = await fetch(API_BASE + "/api/resend-verification", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Could not resend verification email.");
+        }
+
+        resendNote.textContent = data.message || "Verification email sent.";
+      } catch (err) {
+        resendNote.textContent = err.message || "Could not resend verification email.";
+      }
+    });
+  </script>
+</body>
+</html>
