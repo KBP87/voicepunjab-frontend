@@ -8,6 +8,10 @@
     name="description"
     content="Convert Punjabi text to natural voice, translate English to Punjabi, use a Punjabi keyboard, and download MP3 audio instantly with VoicePunjabAI."
   />
+  <meta
+    name="keywords"
+    content="Punjabi text to speech, Punjabi TTS, Punjabi AI voice, Gurmukhi text to speech, Punjabi voice generator, English to Punjabi translation"
+  />
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .usage-card {
@@ -243,32 +247,36 @@
       color: var(--text);
     }
 
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 14px;
+    .marketing-card {
+      margin-top: 20px;
     }
 
-    .demo-box {
+    .marketing-head {
+      max-width: 760px;
+    }
+
+    .marketing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .marketing-box {
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 18px;
+      padding: 20px 18px;
       background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
     }
 
-    .demo-box h3 {
-      margin: 0 0 6px;
+    .marketing-box h3 {
+      margin: 0 0 8px;
       font-size: 17px;
     }
 
-    .demo-text {
-      margin: 10px 0 14px;
-      padding: 12px 14px;
-      background: #f8faff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      color: var(--text);
+    .marketing-box p {
+      margin: 0;
+      color: var(--muted);
       line-height: 1.7;
       font-size: 14px;
     }
@@ -374,10 +382,10 @@
       .feature-grid-3,
       .steps-grid,
       .trust-strip,
-      .demo-grid,
       .audience-grid,
       .pricing-teaser-grid,
-      .hero-points {
+      .hero-points,
+      .marketing-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -423,7 +431,7 @@
           <p class="small hero-text">
             Generate high-quality Punjabi speech, translate English into Punjabi,
             type with a built-in Punjabi keyboard, and download MP3 audio in seconds.
-            Built for creators, educators, learners, and Punjabi-first digital content.
+            VoicePunjabAI is built for creators, learners, educators, and Punjabi-first digital content.
           </p>
 
           <div class="btnrow hero-actions">
@@ -458,31 +466,39 @@
       </div>
     </section>
 
-    <section class="card">
-      <h2>Punjabi Voice Demo</h2>
-      <p class="small">
-        Listen to sample Punjabi voice output before generating your own audio.
-      </p>
+    <section class="card marketing-card">
+      <div class="marketing-head">
+        <h2>Create Punjabi Audio Faster</h2>
+        <p class="small">
+          VoicePunjabAI helps you turn Punjabi text into audio, translate English into Punjabi,
+          and build downloadable voice content from one simple interface. It is designed to be useful,
+          fast, and easy for both beginners and regular users.
+        </p>
+      </div>
 
-      <div class="demo-grid">
-        <div class="demo-box">
-          <h3>Female Punjabi Voice</h3>
-          <div class="demo-text">
-            ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਇਹ VoicePunjabAI ਦਾ ਪੰਜਾਬੀ ਟੈਕਸਟ ਟੂ ਸਪੀਚ ਡੈਮੋ ਹੈ।
-          </div>
-          <audio controls preload="none">
-            <source src="demo/female-demo.mp3" type="audio/mpeg" />
-          </audio>
+      <div class="marketing-grid">
+        <div class="marketing-box">
+          <h3>Generate natural Punjabi voice</h3>
+          <p>
+            Convert Punjabi Gurmukhi text into clear, natural-sounding audio for lessons,
+            videos, voiceovers, and digital content.
+          </p>
         </div>
 
-        <div class="demo-box">
-          <h3>Male Punjabi Voice</h3>
-          <div class="demo-text">
-            ਸਤ ਸ੍ਰੀ ਅਕਾਲ! VoicePunjabAI ਨਾਲ ਤੁਸੀਂ ਪੰਜਾਬੀ ਆਵਾਜ਼ ਤੁਰੰਤ ਤਿਆਰ ਕਰ ਸਕਦੇ ਹੋ।
-          </div>
-          <audio controls preload="none">
-            <source src="demo/male-demo.mp3" type="audio/mpeg" />
-          </audio>
+        <div class="marketing-box">
+          <h3>Translate English into Punjabi</h3>
+          <p>
+            Start with English text, convert it into Punjabi, then move it directly into
+            speech generation from the same workflow.
+          </p>
+        </div>
+
+        <div class="marketing-box">
+          <h3>Download ready-to-use MP3 audio</h3>
+          <p>
+            Play your generated result in the browser and download MP3 audio for content,
+            projects, learning, and publishing.
+          </p>
         </div>
       </div>
     </section>
@@ -742,7 +758,7 @@
       <div class="pricing-teaser-grid">
         <div class="pricing-teaser-card">
           <div class="pricing-plan">Free</div>
-          <div class="pricing-amount">₹0</div>
+          <div class="pricing-amount">$0</div>
           <div class="pricing-sub">Good for testing and light personal use.</div>
           <ul class="pricing-list">
             <li>Daily free usage</li>
@@ -763,7 +779,7 @@
         </div>
 
         <div class="pricing-teaser-card featured">
-          <div class="pricing-plan">Creator</div>
+          <div class="pricing-plan">Pro</div>
           <div class="pricing-amount">Soon</div>
           <div class="pricing-sub">Best for regular videos, lessons, and audio projects.</div>
           <ul class="pricing-list">
@@ -774,13 +790,13 @@
         </div>
 
         <div class="pricing-teaser-card">
-          <div class="pricing-plan">Pro</div>
-          <div class="pricing-amount">Soon</div>
-          <div class="pricing-sub">For advanced users, teams, and larger workloads.</div>
+          <div class="pricing-plan">Business</div>
+          <div class="pricing-amount">Custom</div>
+          <div class="pricing-sub">For teams, education, and larger Punjabi content workflows.</div>
           <ul class="pricing-list">
-            <li>Largest limits</li>
-            <li>Business-ready usage</li>
-            <li>Scalable growth plan</li>
+            <li>Custom limits</li>
+            <li>Business support</li>
+            <li>Scalable usage setup</li>
           </ul>
         </div>
       </div>
