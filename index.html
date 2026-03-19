@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VoicePunjabAI Punjabi Text-To-Speech </title>
+  <title>VoicePunjabAI Punjabi Text-To-Speech</title>
   <meta
     name="description"
-    content="VoicePunjabAI TTS converts Punjabi Gurmukhi text into natural MP3 voice. Translate English to Punjabi, use the Punjabi keyboard, and download audio instantly."
+    content="Convert Punjabi text to natural voice, translate English to Punjabi, use a Punjabi keyboard, and download MP3 audio instantly with VoicePunjabAI."
   />
   <link rel="stylesheet" href="css/style.css" />
   <style>
@@ -44,8 +44,8 @@
 
     .usage-box {
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
+      border-radius: 18px;
+      padding: 18px;
       background: #fcfdff;
     }
 
@@ -141,7 +141,7 @@
 
     .feature-box {
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 18px;
       background: #fcfdff;
     }
@@ -167,7 +167,7 @@
 
     .step-box {
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 18px;
       background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
     }
@@ -176,8 +176,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: var(--primary-soft);
       color: var(--primary);
@@ -189,7 +189,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      margin-top: 14px;
+      margin-top: 18px;
     }
 
     .trust-pill {
@@ -212,6 +212,151 @@
       display: none;
     }
 
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid #dbe4ff;
+      margin-bottom: 14px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-point {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .demo-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    }
+
+    .demo-box h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .demo-text {
+      margin: 10px 0 14px;
+      padding: 12px 14px;
+      background: #f8faff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .audience-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fcfdff;
+    }
+
+    .audience-box h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .audience-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .pricing-teaser-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .pricing-teaser-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px 18px;
+      background: #fcfdff;
+    }
+
+    .pricing-teaser-card.featured {
+      border-color: #cfd8ff;
+      background: linear-gradient(180deg, #f9faff 0%, #eef2ff 100%);
+      box-shadow: 0 12px 24px rgba(79,70,229,.08);
+    }
+
+    .pricing-plan {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-amount {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .pricing-sub {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 44px;
+    }
+
+    .pricing-list {
+      margin-top: 14px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .center-btn {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 1100px) {
+      .audience-grid,
+      .pricing-teaser-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 980px) {
       .header-right {
         width: 100%;
@@ -228,7 +373,11 @@
       .usage-grid,
       .feature-grid-3,
       .steps-grid,
-      .trust-strip {
+      .trust-strip,
+      .demo-grid,
+      .audience-grid,
+      .pricing-teaser-grid,
+      .hero-points {
         grid-template-columns: 1fr;
       }
     }
@@ -267,24 +416,33 @@
     <section class="card hero-card">
       <div class="hero-flex">
         <div class="hero-left">
-          <h1 class="hero-title">Create Natural Punjabi Voice in Seconds</h1>
+          <div class="hero-kicker">Punjabi Voice Platform</div>
+
+          <h1 class="hero-title">Convert Punjabi Text to Natural Voice Instantly</h1>
 
           <p class="small hero-text">
-            Convert Punjabi Gurmukhi text into MP3 audio, translate English into Punjabi,
-            and type with a built-in Punjabi keyboard. VoicePunjabAI is made for creators,
-            learners, educators, and Punjabi content workflows.
+            Generate high-quality Punjabi speech, translate English into Punjabi,
+            type with a built-in Punjabi keyboard, and download MP3 audio in seconds.
+            Built for creators, educators, learners, and Punjabi-first digital content.
           </p>
 
           <div class="btnrow hero-actions">
-            <a href="#toolStart" class="btn-link primary">Start Now</a>
-            <a href="pricing.html" class="btn-link secondary">View Plans</a>
+            <a href="#toolStart" class="btn-link primary">Try Punjabi TTS</a>
+            <a href="pricing.html" class="btn-link secondary">View Pricing</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="hero-point">Punjabi text to MP3 audio</div>
+            <div class="hero-point">English to Punjabi translation</div>
+            <div class="hero-point">Built-in Punjabi keyboard</div>
+            <div class="hero-point">Fast cloud voice generation</div>
           </div>
 
           <div class="trust-strip">
             <div class="trust-pill">Punjabi MP3 Audio</div>
-            <div class="trust-pill">English → Punjabi</div>
-            <div class="trust-pill">Built-in Keyboard</div>
-            <div class="trust-pill">Fast Cloud Voice</div>
+            <div class="trust-pill">Translation Included</div>
+            <div class="trust-pill">Daily Free Usage</div>
+            <div class="trust-pill">Creator Friendly</div>
           </div>
         </div>
 
@@ -292,10 +450,39 @@
           <div class="hero-mini-box">
             <h3>Best for</h3>
             <p class="small">• Punjabi narration and explainers</p>
-            <p class="small">• YouTube, reels, and voiceovers</p>
-            <p class="small">• Punjabi learning tools</p>
-            <p class="small">• Sikh / Punjabi audio content</p>
+            <p class="small">• YouTube videos, reels, and voiceovers</p>
+            <p class="small">• Punjabi learning tools and lessons</p>
+            <p class="small">• Cultural, educational, and Sikh content</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Punjabi Voice Demo</h2>
+      <p class="small">
+        Listen to sample Punjabi voice output before generating your own audio.
+      </p>
+
+      <div class="demo-grid">
+        <div class="demo-box">
+          <h3>Female Punjabi Voice</h3>
+          <div class="demo-text">
+            ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਇਹ VoicePunjabAI ਦਾ ਪੰਜਾਬੀ ਟੈਕਸਟ ਟੂ ਸਪੀਚ ਡੈਮੋ ਹੈ।
+          </div>
+          <audio controls preload="none">
+            <source src="demo/female-demo.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+
+        <div class="demo-box">
+          <h3>Male Punjabi Voice</h3>
+          <div class="demo-text">
+            ਸਤ ਸ੍ਰੀ ਅਕਾਲ! VoicePunjabAI ਨਾਲ ਤੁਸੀਂ ਪੰਜਾਬੀ ਆਵਾਜ਼ ਤੁਰੰਤ ਤਿਆਰ ਕਰ ਸਕਦੇ ਹੋ।
+          </div>
+          <audio controls preload="none">
+            <source src="demo/male-demo.mp3" type="audio/mpeg" />
+          </audio>
         </div>
       </div>
     </section>
@@ -347,21 +534,24 @@
         <div class="feature-box">
           <h3>Punjabi-first workflow</h3>
           <p>
-            Built specifically for Punjabi text, Punjabi voice generation, and English to Punjabi conversion.
+            Built specifically for Punjabi text, natural Punjabi voice generation,
+            and English to Punjabi conversion in one place.
           </p>
         </div>
 
         <div class="feature-box">
           <h3>Fast MP3 generation</h3>
           <p>
-            Generate playable MP3 audio quickly and download it for your own content workflow.
+            Convert text into playable MP3 audio quickly and download it for
+            videos, lessons, reels, apps, and other content workflows.
           </p>
         </div>
 
         <div class="feature-box">
           <h3>Easy for creators and learners</h3>
           <p>
-            Use it for Punjabi YouTube videos, educational content, audio lessons, and narration projects.
+            Use it for Punjabi YouTube videos, learning support, educational content,
+            audio lessons, narration, and cultural content.
           </p>
         </div>
       </div>
@@ -499,6 +689,31 @@
     </section>
 
     <section class="card">
+      <h2>Who Uses VoicePunjabAI?</h2>
+      <div class="audience-grid">
+        <div class="audience-box">
+          <h3>YouTube creators</h3>
+          <p>Create Punjabi voiceovers for explainers, reels, devotional clips, and content channels.</p>
+        </div>
+
+        <div class="audience-box">
+          <h3>Teachers & educators</h3>
+          <p>Generate Punjabi audio lessons, reading support, and educational voice content.</p>
+        </div>
+
+        <div class="audience-box">
+          <h3>App developers</h3>
+          <p>Add Punjabi speech output to websites, apps, and digital learning tools.</p>
+        </div>
+
+        <div class="audience-box">
+          <h3>Learners & families</h3>
+          <p>Use Punjabi audio for pronunciation support, language practice, and home learning.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Popular Use Cases</h2>
       <div class="feature-grid-3">
         <div class="feature-box">
@@ -513,8 +728,65 @@
 
         <div class="feature-box">
           <h3>Educational and cultural content</h3>
-          <p>Build Sikh, Punjabi, and educational audio content with easy text input and downloadable MP3 output.</p>
+          <p>Build Punjabi, Sikh, and educational audio content with easy text input and downloadable MP3 output.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Simple Plans for Every Stage</h2>
+      <p class="small">
+        Start free, then upgrade when you need more characters, more content, and more production capacity.
+      </p>
+
+      <div class="pricing-teaser-grid">
+        <div class="pricing-teaser-card">
+          <div class="pricing-plan">Free</div>
+          <div class="pricing-amount">₹0</div>
+          <div class="pricing-sub">Good for testing and light personal use.</div>
+          <ul class="pricing-list">
+            <li>Daily free usage</li>
+            <li>Punjabi TTS</li>
+            <li>English to Punjabi</li>
+          </ul>
+        </div>
+
+        <div class="pricing-teaser-card">
+          <div class="pricing-plan">Starter</div>
+          <div class="pricing-amount">Soon</div>
+          <div class="pricing-sub">For light creators and simple voice content.</div>
+          <ul class="pricing-list">
+            <li>More characters</li>
+            <li>Better monthly limits</li>
+            <li>Faster content workflow</li>
+          </ul>
+        </div>
+
+        <div class="pricing-teaser-card featured">
+          <div class="pricing-plan">Creator</div>
+          <div class="pricing-amount">Soon</div>
+          <div class="pricing-sub">Best for regular videos, lessons, and audio projects.</div>
+          <ul class="pricing-list">
+            <li>Higher monthly limits</li>
+            <li>Creator-friendly usage</li>
+            <li>Built for frequent use</li>
+          </ul>
+        </div>
+
+        <div class="pricing-teaser-card">
+          <div class="pricing-plan">Pro</div>
+          <div class="pricing-amount">Soon</div>
+          <div class="pricing-sub">For advanced users, teams, and larger workloads.</div>
+          <ul class="pricing-list">
+            <li>Largest limits</li>
+            <li>Business-ready usage</li>
+            <li>Scalable growth plan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="center-btn">
+        <a href="pricing.html" class="btn-link primary">See Full Pricing</a>
       </div>
     </section>
 
@@ -522,7 +794,10 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-title">VoicePunjabAI</div>
-          <p class="footer-text">Punjabi Text-to-Speech and translation tool.</p>
+          <p class="footer-text">
+            Punjabi text-to-speech and translation platform for creators, educators,
+            learners, and Punjabi digital content.
+          </p>
         </div>
 
         <div class="footer-links">

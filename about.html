@@ -1,202 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About - VoicePunjabAI</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - VoicePunjabAI</title>
+  <meta
+    name="description"
+    content="Learn about VoicePunjabAI, a Punjabi text-to-speech and translation platform built for creators, educators, learners, and Punjabi digital content."
+  />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .about-hero {
+      margin-top: 20px;
+      padding: 30px 28px;
+    }
+
+    .about-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid #dbe4ff;
+      margin-bottom: 14px;
+    }
+
+    .about-title {
+      margin: 0 0 12px;
+      font-size: 40px;
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      max-width: 760px;
+    }
+
+    .about-text {
+      max-width: 820px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .about-grid-3,
+    .about-grid-4 {
+      display: grid;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .about-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about-grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .info-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    }
+
+    .info-box h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fcfdff;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .goal-box {
+      border: 1px solid #dbe4ff;
+      background: linear-gradient(135deg, #f8faff 0%, #eef2ff 100%);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .social-btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      transition: .2s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15,23,42,.08);
+    }
+
+    @media (max-width: 980px) {
+      .about-title {
+        font-size: 34px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid-3,
+      .about-grid-4,
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .about-title {
+        font-size: 28px;
+      }
+
+      .about-hero {
+        padding: 22px 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <div class="logo-wrap">
+            <img src="images/logo.png" alt="VoicePunjabAI logo" class="site-logo" />
+          </div>
 
-<header class="topbar">
+          <div>
+            <div class="title">VoicePunjabAI</div>
+            <div class="subtitle">Punjabi Text-to-Speech & Translation</div>
+          </div>
+        </a>
+      </div>
 
-<div class="brand">
-<a href="index.html" class="brand-link">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
 
-<div class="logo-wrap">
-<img src="images/logo.png" alt="VoicePunjabAI logo" class="site-logo">
-</div>
+      <div class="header-right">
+        <div class="status ok">About the Platform</div>
+      </div>
+    </header>
 
-<div>
-<div class="title">VoicePunjabAI</div>
-<div class="subtitle">Punjabi Text-to-Speech & Translation</div>
-</div>
+    <section class="card about-hero">
+      <div class="about-kicker">About VoicePunjabAI</div>
+      <h1 class="about-title">Built to make Punjabi voice technology simple and accessible</h1>
+      <p class="about-text">
+        VoicePunjabAI is a Punjabi text-to-speech and translation platform designed for creators,
+        educators, learners, families, and digital products. It helps users convert Punjabi text
+        into natural voice, translate English into Punjabi, and create downloadable MP3 audio in a
+        faster and more practical way.
+      </p>
+    </section>
 
-</a>
-</div>
+    <section class="card">
+      <h2>What is VoicePunjabAI?</h2>
 
-<nav class="nav">
-<a href="index.html">Home</a>
-<a href="pricing.html">Pricing</a>
-<a href="about.html" class="active">About</a>
-<a href="contact.html">Contact</a>
-</nav>
+      <p class="small">
+        VoicePunjabAI was created to make Punjabi voice technology easier to use in everyday digital
+        workflows. While many speech tools support major global languages, Punjabi support is still
+        limited and often harder to access in a simple format.
+      </p>
 
-<div class="header-right">
-<div class="status ok">About the Project</div>
-</div>
+      <p class="small">
+        This platform focuses specifically on Punjabi needs. Users can paste Punjabi text, translate
+        English into Punjabi, type using a built-in Punjabi keyboard, and generate MP3 audio for
+        videos, lessons, narration, learning support, and other creative use cases.
+      </p>
+    </section>
 
-</header>
+    <section class="card">
+      <h2>Main Features</h2>
 
+      <div class="feature-list">
+        <div class="feature-item">Punjabi text-to-speech voice generation</div>
+        <div class="feature-item">English to Punjabi translation</div>
+        <div class="feature-item">Built-in Punjabi typing keyboard</div>
+        <div class="feature-item">Adjustable voice speed and pitch</div>
+        <div class="feature-item">Downloadable MP3 audio output</div>
+        <div class="feature-item">Daily usage tracking by plan</div>
+      </div>
+    </section>
 
-<section class="intro-strip">
-<p>
-VoicePunjabAI is an AI-powered platform that converts Punjabi Gurmukhi text into natural sounding speech. The platform also provides English to Punjabi translation and a built-in Punjabi keyboard to make typing easier.
-</p>
-</section>
+    <section class="card">
+      <h2>Who Uses VoicePunjabAI?</h2>
 
+      <div class="about-grid-4">
+        <div class="info-box">
+          <h3>Creators</h3>
+          <p>
+            Useful for YouTube creators, reel makers, and voiceover workflows that need Punjabi narration.
+          </p>
+        </div>
 
-<section class="card" style="margin-top:20px;">
+        <div class="info-box">
+          <h3>Teachers</h3>
+          <p>
+            Helps educators build Punjabi audio lessons, reading support material, and learning content.
+          </p>
+        </div>
 
-<h2>What is VoicePunjabAI?</h2>
+        <div class="info-box">
+          <h3>Learners</h3>
+          <p>
+            Supports Punjabi learners with pronunciation practice, listening exercises, and text-to-audio study.
+          </p>
+        </div>
 
-<p class="small">
-VoicePunjabAI was created to make Punjabi voice technology more accessible for everyday users. Many tools exist for English speech generation, but Punjabi support is still limited. VoicePunjabAI focuses specifically on Punjabi language needs.
-</p>
+        <div class="info-box">
+          <h3>Developers</h3>
+          <p>
+            Useful for apps, websites, and tools that want Punjabi speech generation or language support.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<p class="small">
-Users can paste Punjabi text, convert English into Punjabi, and generate downloadable MP3 audio. This makes the platform useful for learners, content creators, educators, and anyone who wants to generate Punjabi voice quickly.
-</p>
+    <section class="card">
+      <h2>Technology Behind the Platform</h2>
 
-</section>
+      <p class="small">
+        VoicePunjabAI combines a modern frontend with cloud-based language services to deliver Punjabi
+        speech and translation quickly through a simple web interface.
+      </p>
 
+      <div class="about-grid-3">
+        <div class="info-box">
+          <h3>Web Platform</h3>
+          <p>
+            Built with modern frontend pages and a secure backend API to handle text, audio generation, and user flows.
+          </p>
+        </div>
 
-<section class="card" style="margin-top:20px;">
+        <div class="info-box">
+          <h3>Cloud AI Services</h3>
+          <p>
+            Uses Google Cloud Text-to-Speech and translation services to generate Punjabi voice and language conversion.
+          </p>
+        </div>
 
-<h2>Main Features</h2>
+        <div class="info-box">
+          <h3>Performance & Security</h3>
+          <p>
+            Includes caching, usage tracking, authentication, and secure request handling for a smoother SaaS experience.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<div class="small">• Punjabi text-to-speech voice generation</div>
-<div class="small">• English to Punjabi translation</div>
-<div class="small">• Built-in Punjabi typing keyboard</div>
-<div class="small">• Adjustable voice speed and pitch</div>
-<div class="small">• Downloadable MP3 audio</div>
-<div class="small">• Daily usage tracking</div>
+    <section class="card goal-box">
+      <h2>Our Goal</h2>
 
-</section>
+      <p class="small">
+        The goal of VoicePunjabAI is to support Punjabi in digital spaces and make Punjabi voice tools
+        more available for everyday use. The platform aims to help people create, learn, build, and
+        share Punjabi content more easily through practical and accessible technology.
+      </p>
+    </section>
 
+    <section class="card">
+      <h2>Stay Connected</h2>
 
-<section class="card" style="margin-top:20px;">
+      <p class="small">
+        Follow VoicePunjabAI on social media for product updates, new features, and future improvements.
+      </p>
 
-<h2>Who Can Use VoicePunjabAI?</h2>
+      <div class="social-row">
+        <a
+          href="https://www.facebook.com/profile.php?id=61582754938512"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-btn"
+        >
+          Facebook
+        </a>
 
-<p class="small">
-VoicePunjabAI is useful for many types of users including:
-</p>
+        <a
+          href="https://www.instagram.com/voicepunjabai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-btn"
+        >
+          Instagram
+        </a>
+      </div>
+    </section>
 
-<div class="small">• Punjabi language learners</div>
-<div class="small">• Content creators and YouTube channels</div>
-<div class="small">• Teachers and educators</div>
-<div class="small">• Podcast and narration creators</div>
-<div class="small">• Developers working with Punjabi content</div>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-title">VoicePunjabAI</div>
+          <p class="footer-text">
+            Punjabi text-to-speech and translation platform for generating natural MP3 audio from Punjabi text.
+          </p>
+        </div>
 
-</section>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h3>Product</h3>
+            <a href="index.html">Home</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
 
+          <div class="footer-col">
+            <h3>Company</h3>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
 
-<section class="card" style="margin-top:20px;">
+          <div class="footer-col">
+            <h3>Legal</h3>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </div>
+        </div>
+      </div>
 
-<h2>Technology Behind the Platform</h2>
+      <div class="footer-bottom">
+        <div class="footer-note">© 2026 VoicePunjabAI. All rights reserved.</div>
+      </div>
+    </footer>
 
-<p class="small">
-VoicePunjabAI uses modern web technologies and cloud-based AI services to generate speech and translation.
-</p>
-
-<div class="small">• Node.js backend API</div>
-<div class="small">• Google Cloud Text-to-Speech</div>
-<div class="small">• Google Cloud Translation API</div>
-<div class="small">• Secure API architecture</div>
-<div class="small">• Intelligent caching system to improve performance</div>
-
-<p class="small">
-The platform also uses caching and usage limits to reduce API costs while keeping the service available for free users.
-</p>
-
-</section>
-
-
-<section class="card" style="margin-top:20px;">
-
-<h2>Our Goal</h2>
-
-<p class="small">
-The goal of VoicePunjabAI is to support the Punjabi language in digital spaces and make Punjabi voice tools more widely available. By providing simple and accessible technology, the platform aims to help creators, learners, and developers work with Punjabi content more easily.
-</p>
-
-</section>
-
-
-<section class="card" style="margin-top:20px;">
-
-<h2>Stay Connected</h2>
-
-<p class="small">
-Follow VoicePunjabAI on social media to stay updated about new features and improvements.
-</p>
-
-<div class="small">
-Facebook:
-<a href="https://www.facebook.com/profile.php?id=61582754938512" target="_blank">
-VoicePunjabAI
-</a>
-</div>
-
-<div class="small">
-Instagram:
-<a href="https://www.instagram.com/voicepunjabai/" target="_blank">
-@voicepunjabai
-</a>
-</div>
-
-</section>
-
-
-
-<footer class="site-footer">
-
-<div class="footer-top">
-
-<div class="footer-brand">
-<div class="footer-title">VoicePunjabAI</div>
-<p class="footer-text">
-Punjabi Text-to-Speech and translation tool for generating natural MP3 audio from Punjabi Gurmukhi text.
-</p>
-</div>
-
-<div class="footer-links">
-
-<div class="footer-col">
-<h3>Product</h3>
-<a href="index.html">Home</a>
-<a href="pricing.html">Pricing</a>
-</div>
-
-<div class="footer-col">
-<h3>Company</h3>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</div>
-
-<div class="footer-col">
-<h3>Legal</h3>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms of Service</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-<div class="footer-note">
-© 2026 VoicePunjabAI. All rights reserved.
-</div>
-</div>
-
-</footer>
-
-</div>
-
+  </div>
 </body>
 </html>

@@ -4,7 +4,131 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - VoicePunjabAI</title>
+  <meta
+    name="description"
+    content="Log in to your VoicePunjabAI account to access Punjabi text-to-speech, translation, account usage, and plan limits."
+  />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .auth-shell {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .auth-hero {
+      padding: 30px 28px;
+    }
+
+    .auth-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid #dbe4ff;
+      margin-bottom: 14px;
+    }
+
+    .auth-title {
+      margin: 0 0 12px;
+      font-size: 38px;
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      max-width: 560px;
+    }
+
+    .auth-text {
+      max-width: 620px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .auth-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .auth-point {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .auth-card {
+      padding: 24px;
+    }
+
+    .auth-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .note-box {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8faff;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .divider-line {
+      margin: 22px 0;
+      border: none;
+      border-top: 1px solid #e3e8f4;
+    }
+
+    .resend-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .status-note.success {
+      color: #15803d;
+    }
+
+    .status-note.error {
+      color: #be123c;
+    }
+
+    @media (max-width: 980px) {
+      .auth-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-title {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .auth-title {
+        font-size: 28px;
+      }
+
+      .auth-hero,
+      .auth-card {
+        padding: 20px 18px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -35,48 +159,67 @@
       </div>
     </header>
 
-    <section class="intro-strip">
-      <p id="verifyBanner">
-        Log in to track your usage by account and access your plan limits.
-      </p>
-    </section>
+    <section class="auth-shell">
+      <section class="card auth-hero">
+        <div class="auth-kicker">Welcome Back</div>
+        <h1 class="auth-title">Log in to continue using your Punjabi voice workspace</h1>
+        <p class="auth-text" id="verifyBanner">
+          Log in to track your account usage, access your plan limits, manage your Punjabi
+          voice workflow, and continue generating text-to-speech and translation results.
+        </p>
 
-    <section class="card" style="margin-top:20px; max-width:700px;">
-      <h2>Login</h2>
-      <p class="small">Enter your email and password to continue.</p>
-
-      <form id="loginForm" style="margin-top:14px;">
-        <label class="labelBlock" for="loginEmail">Email</label>
-        <input type="email" id="loginEmail" placeholder="Enter your email" required>
-
-        <label class="labelBlock" for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password" required>
-
-        <div class="btnrow">
-          <button type="submit" class="primary">Login</button>
-          <a href="signup.html" class="btn-link secondary">Create Account</a>
+        <div class="auth-points">
+          <div class="auth-point">Track your daily usage and plan limits</div>
+          <div class="auth-point">Access Punjabi text-to-speech and translation tools</div>
+          <div class="auth-point">Use your account across the VoicePunjabAI platform</div>
         </div>
+      </section>
 
-        <div class="small" style="margin-top:10px;">
-          <a href="forgot-password.html">Forgot your password?</a>
+      <section class="card auth-card">
+        <h2>Login</h2>
+        <p class="small">Enter your email and password to continue.</p>
+
+        <form id="loginForm" style="margin-top:14px;">
+          <label class="labelBlock" for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required />
+
+          <label class="labelBlock" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required />
+
+          <div class="btnrow">
+            <button type="submit" class="primary">Login</button>
+            <a href="signup.html" class="btn-link secondary">Create Account</a>
+          </div>
+
+          <div class="small" style="margin-top:10px;">
+            <a href="forgot-password.html">Forgot your password?</a>
+          </div>
+
+          <div id="loginNote" class="small">Use your VoicePunjabAI account to continue.</div>
+        </form>
+
+        <hr class="divider-line" />
+
+        <h3 class="resend-title">Resend Verification Email</h3>
+        <p class="small" style="margin-top:0;">
+          Use this if you signed up but did not receive your verification email.
+        </p>
+
+        <form id="resendForm" style="margin-top:10px;">
+          <label class="labelBlock" for="resendEmail">Email</label>
+          <input type="email" id="resendEmail" placeholder="Enter your email" required />
+
+          <div class="btnrow">
+            <button type="submit">Resend Verification</button>
+          </div>
+
+          <div id="resendNote" class="small">Verification emails are sent to your account email address.</div>
+        </form>
+
+        <div class="note-box">
+          Please make sure you verify your email before logging in for the first time.
         </div>
-
-        <div id="loginNote" class="small">Use your VoicePunjabAI account to continue.</div>
-      </form>
-
-      <hr style="margin:20px 0; border:none; border-top:1px solid #e3e8f4;">
-
-      <h3 style="margin-top:0;">Resend Verification Email</h3>
-      <form id="resendForm" style="margin-top:10px;">
-        <label class="labelBlock" for="resendEmail">Email</label>
-        <input type="email" id="resendEmail" placeholder="Enter your email" required>
-
-        <div class="btnrow">
-          <button type="submit">Resend Verification</button>
-        </div>
-
-        <div id="resendNote" class="small">Use this if you did not receive your verification email.</div>
-      </form>
+      </section>
     </section>
 
     <footer class="site-footer">
@@ -110,6 +253,7 @@
       const password = document.getElementById("loginPassword").value;
 
       loginNote.textContent = "Logging in...";
+      loginNote.className = "small";
 
       try {
         const res = await fetch(API_BASE + "/api/login", {
@@ -130,9 +274,11 @@
         localStorage.setItem("vp_user", JSON.stringify(data.user));
 
         loginNote.textContent = "Login successful. Redirecting...";
+        loginNote.className = "small status-note success";
         window.location.href = "index.html";
       } catch (err) {
         loginNote.textContent = err.message || "Login failed.";
+        loginNote.className = "small status-note error";
       }
     });
 
@@ -141,6 +287,7 @@
 
       const email = document.getElementById("resendEmail").value.trim();
       resendNote.textContent = "Sending verification email...";
+      resendNote.className = "small";
 
       try {
         const res = await fetch(API_BASE + "/api/resend-verification", {
@@ -158,8 +305,10 @@
         }
 
         resendNote.textContent = data.message || "Verification email sent.";
+        resendNote.className = "small status-note success";
       } catch (err) {
         resendNote.textContent = err.message || "Could not resend verification email.";
+        resendNote.className = "small status-note error";
       }
     });
   </script>
