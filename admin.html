@@ -29,17 +29,28 @@
       margin-bottom: 25px;
     }
 
-    button {
+    button, .btn-link {
       padding: 10px 18px;
       border: none;
       border-radius: 6px;
       background: #4c6ef5;
       color: white;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
     }
 
-    button:hover {
+    button:hover, .btn-link:hover {
       background: #3b5bdb;
+    }
+
+    .btn-secondary {
+      background: #868e96;
+    }
+
+    .btn-secondary:hover {
+      background: #6c757d;
     }
 
     .status {
@@ -103,20 +114,27 @@
       text-align: left;
       border-bottom: 1px solid #eee;
       font-size: 14px;
+      word-break: break-word;
     }
 
     th {
       background: #f8f9fa;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
   <h1>VoicePunjab Admin Dashboard</h1>
-  <div class="note">This page now uses logged-in admin access instead of a shared admin token.</div>
+  <div class="note">This page uses logged-in admin access only.</div>
 
   <div class="topbar">
     <button id="loadBtn" type="button">Refresh Stats</button>
+    <a href="login.html" class="btn-link btn-secondary">Go to Login</a>
+    <button id="logoutBtn" type="button" class="btn-secondary">Logout</button>
     <div id="status" class="status">Checking admin access...</div>
   </div>
 
@@ -206,6 +224,7 @@
     const statusEl = document.getElementById("status");
     const topClientsBody = document.getElementById("topClientsBody");
     const loadBtn = document.getElementById("loadBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
 
     function getToken() {
       return localStorage.getItem("vp_token") || "";
@@ -219,54 +238,125 @@
       }
     }
 
+    function clearAuth() {
+      localStorage.removeItem("vp_token");
+      localStorage.removeItem("vp_user");
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
     function setStatus(ok, message) {
       statusEl.classList.remove("ok", "bad");
       statusEl.classList.add(ok ? "ok" : "bad");
       statusEl.textContent = message;
     }
 
+    function resetStats() {
+      const ids = [
+        "ttsRequests",
+        "trRequests",
+        "ttsChars",
+        "trChars",
+        "ttsHit",
+        "trHit",
+        "trCache",
+        "ttsCache",
+        "usageRows",
+        "requestRows",
+        "translateLimit",
+        "ttsLimit"
+      ];
+
+      ids.forEach(id => {
+        document.getElementById(id).innerText = "-";
+      });
+
+      topClientsBody.innerHTML = `<tr><td colspan="3">No data loaded yet.</td></tr>`;
+    }
+
     function fillStats(data) {
-      document.getElementById("ttsRequests").innerText = data.today.tts_requests;
-      document.getElementById("trRequests").innerText = data.today.translate_requests;
-      document.getElementById("ttsChars").innerText = data.today.tts_characters;
-      document.getElementById("trChars").innerText = data.today.translate_characters;
-      document.getElementById("ttsHit").innerText = data.today.tts_cache_hit_rate;
-      document.getElementById("trHit").innerText = data.today.translate_cache_hit_rate;
-      document.getElementById("trCache").innerText = data.totals.translation_cache_records;
-      document.getElementById("ttsCache").innerText = data.totals.tts_cache_records;
-      document.getElementById("usageRows").innerText = data.totals.usage_log_rows;
-      document.getElementById("requestRows").innerText = data.totals.request_log_rows;
-      document.getElementById("translateLimit").innerText = data.limits.daily_translate_char_limit;
-      document.getElementById("ttsLimit").innerText = data.limits.daily_tts_char_limit;
+      document.getElementById("ttsRequests").innerText = data.today?.tts_requests ?? 0;
+      document.getElementById("trRequests").innerText = data.today?.translate_requests ?? 0;
+      document.getElementById("ttsChars").innerText = data.today?.tts_characters ?? 0;
+      document.getElementById("trChars").innerText = data.today?.translate_characters ?? 0;
+      document.getElementById("ttsHit").innerText = data.today?.tts_cache_hit_rate ?? "0%";
+      document.getElementById("trHit").innerText = data.today?.translate_cache_hit_rate ?? "0%";
+      document.getElementById("trCache").innerText = data.totals?.translation_cache_records ?? 0;
+      document.getElementById("ttsCache").innerText = data.totals?.tts_cache_records ?? 0;
+      document.getElementById("usageRows").innerText = data.totals?.usage_log_rows ?? 0;
+      document.getElementById("requestRows").innerText = data.totals?.request_log_rows ?? 0;
+      document.getElementById("translateLimit").innerText = data.limits?.daily_translate_char_limit ?? 0;
+      document.getElementById("ttsLimit").innerText = data.limits?.daily_tts_char_limit ?? 0;
 
       const clients = data.top_clients_today || [];
 
       if (!clients.length) {
         topClientsBody.innerHTML = `<tr><td colspan="3">No client activity today.</td></tr>`;
-      } else {
-        topClientsBody.innerHTML = clients.map(client => `
-          <tr>
-            <td>${client.client_id}</td>
-            <td>${client.requests}</td>
-            <td>${client.chars}</td>
-          </tr>
-        `).join("");
+        return;
+      }
+
+      topClientsBody.innerHTML = clients.map(client => `
+        <tr>
+          <td>${escapeHtml(client.client_id)}</td>
+          <td>${escapeHtml(client.requests)}</td>
+          <td>${escapeHtml(client.chars)}</td>
+        </tr>
+      `).join("");
+    }
+
+    async function verifyAdminAccess() {
+      const token = getToken();
+      const savedUser = getSavedUser();
+
+      if (!token || !savedUser) {
+        setStatus(false, "Please log in first.");
+        return { ok: false };
+      }
+
+      try {
+        const meRes = await fetch(`${CLOUD_RUN}/api/me`, {
+          headers: {
+            Authorization: "Bearer " + token
+          },
+          cache: "no-store"
+        });
+
+        const meData = await meRes.json();
+
+        if (!meRes.ok || !meData.loggedIn || !meData.user) {
+          clearAuth();
+          setStatus(false, "Session expired. Please log in again.");
+          return { ok: false };
+        }
+
+        localStorage.setItem("vp_user", JSON.stringify(meData.user));
+
+        if (!meData.user.is_admin) {
+          setStatus(false, "This account is not an admin.");
+          return { ok: false };
+        }
+
+        return { ok: true, token, user: meData.user };
+      } catch (err) {
+        console.error("Admin access check failed:", err);
+        setStatus(false, "Could not verify admin access.");
+        return { ok: false };
       }
     }
 
     async function loadStats() {
-      const token = getToken();
-      const user = getSavedUser();
+      resetStats();
+      setStatus(true, "Checking admin access...");
 
-      if (!token || !user) {
-        setStatus(false, "Please log in first.");
-        return;
-      }
-
-      if (!user.is_admin) {
-        setStatus(false, "This account is not an admin.");
-        return;
-      }
+      const access = await verifyAdminAccess();
+      if (!access.ok) return;
 
       setStatus(true, "Loading admin stats...");
 
@@ -274,7 +364,7 @@
         const res = await fetch(`${CLOUD_RUN}/api/admin/stats`, {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + token
+            Authorization: "Bearer " + access.token
           },
           cache: "no-store"
         });
@@ -292,6 +382,11 @@
         setStatus(false, `Failed to load stats: ${err.message}`);
       }
     }
+
+    logoutBtn.addEventListener("click", () => {
+      clearAuth();
+      window.location.href = "login.html";
+    });
 
     loadBtn.addEventListener("click", loadStats);
     loadStats();
