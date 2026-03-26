@@ -46,10 +46,10 @@ body{
   display:grid;
   grid-template-columns:auto 1fr auto;
   align-items:center;
-  gap:18px;
-  padding:18px 22px;
+  gap:22px;
+  padding:20px 24px;
   border-radius:var(--radius);
-  background:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.92);
   box-shadow:var(--shadow);
   border:1px solid var(--border);
   backdrop-filter:blur(10px);
@@ -58,49 +58,52 @@ body{
 .brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
   justify-self:start;
 }
 
 .brand-link{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
   text-decoration:none;
   color:inherit;
 }
 
 .logo-wrap{
-  width:70px;
-  height:70px;
-  border-radius:16px;
-  background:#ffffff;
-  border:1px solid var(--border);
-  box-shadow:0 8px 20px rgba(79,70,229,.12);
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:transparent;   /* remove white box */
+  border:none;              /* remove border */
+  box-shadow:none;          /* remove shadow */
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
   flex-shrink:0;
+  padding:0;                /* VERY IMPORTANT */
 }
 
 .site-logo{
   width:100%;
   height:100%;
-  object-fit:contain;
-  display:block;
+  object-fit:cover;   /* fills circle nicely */
+  border-radius:50%;  /* ensures circle */
 }
 
 .title{
   font-weight:800;
-  font-size:28px;
-  line-height:1.1;
+  font-size:30px;
+  line-height:1.05;
+  margin:0;
 }
 
 .subtitle{
   color:var(--muted);
-  font-size:14px;
-  margin-top:3px;
+  font-size:15px;
+  margin-top:4px;
+  line-height:1.3;
 }
 
 .nav{
@@ -696,6 +699,17 @@ audio{
 }
 
 @media (max-width:900px){
+  .logo-wrap{
+    width:82px;
+    height:82px;
+    border-radius:20px;
+    padding:7px;
+  }
+
+  .title{
+    font-size:26px;
+  }
+
   .grid{
     grid-template-columns:1fr;
   }
@@ -720,10 +734,6 @@ audio{
     grid-template-columns:1fr;
   }
 
-  .title{
-    font-size:24px;
-  }
-
   .hero-title{
     font-size:30px;
   }
@@ -738,6 +748,21 @@ audio{
 }
 
 @media (max-width:600px){
+  .logo-wrap{
+    width:72px;
+    height:72px;
+    border-radius:18px;
+    padding:6px;
+  }
+
+  .title{
+    font-size:24px;
+  }
+
+  .subtitle{
+    font-size:14px;
+  }
+
   .hero-title{
     font-size:26px;
   }
